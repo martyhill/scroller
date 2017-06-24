@@ -1,0 +1,87 @@
+#alert-overlay {
+    display: none;
+    box-sizing: border-box;
+    background-color: rgba(0,0,0,0.7);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    text-align: center;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-weight: normal;
+    letter-spacing: normal;
+}
+
+#alert-dialog {
+    box-sizing: border-box;
+    border: 2px solid Yellow;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 3em;
+    background-color: rgba(25,25,25,1.0);
+    overflow: auto;
+    z-index: 1001;
+    width: 50%;
+    max-height: 80%;
+    position: relative;
+    display: inline-block;
+}
+
+#alert-title {
+    box-sizing: border-box;
+    color: Black;
+    background-color: Yellow;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+    padding: 0.5em;
+}
+
+#alert-message {
+    box-sizing: border-box;
+    color: White;
+    padding-top: 1em;
+    width: 85%;
+    margin: 0 auto;
+    overflow: auto;
+    font-weight: normal;
+}
+
+#alert-buttonbar {
+    box-sizing: border-box;
+    border-spacing: 2em 0em;
+    margin: 1em auto;
+    outline-color: transparent;
+    z-index: 1002;
+}
+
+.alert-button {
+    box-sizing: border-box;
+    display: inline;
+    padding: 0.5em 2em;
+    margin: 0 2em;
+    color: Black;
+    background-color: White;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-align: center;
+    cursor: pointer;
+}
+
+.alert-button:hover {
+    color: Black;
+    background-color: Yellow;
+}
+
+.alert-wait {
+    box-sizing: border-box;
+    color: White;
+    padding: 0.5em;
+    z-index: 1002;
+    white-space: nowrap;
+    overflow: hidden;
+    text-align: center;
+}

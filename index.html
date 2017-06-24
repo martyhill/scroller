@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Scroller</title>
+        <link rel="stylesheet" type="text/css" href="css/styles.css" />
+        <link rel="stylesheet" type="text/css" href="css/icon-font-styles.css">
+        <link rel="stylesheet" type="text/css" href="css/alert.css" />
+        <script src="js/jquery-3.2.0.min.js"></script>
+        <script src="js/Scroller.js"></script>
+        <script src="js/alert.js"></script>
+    </head>
+
+	<body>
+        <div id="title" class="titlePanel" tabindex="1">
+        </div>
+
+        <div id="song" class="songPanel">
+        </div>
+
+        <div class="commandPanel">
+            <div id="nextSong" title="Next Song" class="command">
+            <span class="arrow_carrot-down_alt2"></span>
+            </div>
+            <span id="songNumber">0</span>/<span id="songCount">0</span>
+            <div id="prevSong" title="Previous Song" class="command">
+            <span class="arrow_carrot-up_alt2"></span>
+            </div>
+            
+            &nbsp;|&nbsp;
+            
+            <div id="toggleScroll" title="Start/Stop Scrolling" class="command">
+            <span id="scrollButton" class="arrow_carrot-2down_alt2"></span>
+            </div>
+            
+            &nbsp;|&nbsp;
+            
+            <div id="maxSlower" title="REDUCE Scroll Speed" class="command">
+            <span class="arrow_carrot-2left_alt2"></span>
+            </div>
+            <div id="minSlower" title="Reduce Scroll Speed" class="command">
+            <span class="arrow_carrot-left_alt2"></span>
+            </div>
+            <span id="speed">000</span>
+            <div id="minFaster" title="Increase Scroll Speed" class="command">
+            <span class="arrow_carrot-right_alt2"></span>
+            </div>
+            <div id="maxFaster" title="INCREASE Scroll Speed" class="command">
+            <span class="arrow_carrot-2right_alt2"></span>
+            </div>
+            
+            &nbsp;|&nbsp;
+
+            <div id="bigger" title="Increase Text Size" class="command">
+            <span class="icon_zoom-in_alt"></span>
+            </div>
+            <span id="size">000</span>
+            <div id="smaller" title="Reduce Text Size" class="command">
+            <span class="icon_zoom-out_alt"></span>
+            </div>
+
+            &nbsp;|&nbsp;
+
+            <div id="configure" title="Configure Scroller" class="command">
+            <span class="icon_cog"></span>
+            </div>
+        
+            &nbsp;|&nbsp;
+
+            <div id="help" title="Show User Guide" class="command">
+            <span class="icon_question_alt2"></span>
+            </div>
+        </div> 
+
+        <div id="overlay" class="overlay" tabindex="2">
+            <div id="overlayPanel" class="overlayPanel">
+                
+                <span id="listGroup" tabindex="3" style="display: none;">
+                    <div id="songTitles" class="overlayContent songTitles">
+                    </div>
+                    <div class="footer">
+                        <div id="moveDown" title="Move Selected Song Down" class="command">
+                        <span class="arrow_carrot-down_alt2"></span>
+                        </div>
+                        <div id="moveUp" title="Move Selected Song Up" class="command">
+                        <span class="arrow_carrot-up_alt2"></span>
+                        </div>
+                        
+                        &nbsp;|&nbsp;
+
+                        <div id="add" title="Add New Song" class="command">
+                        <span class="icon_plus_alt2"></span>
+                        </div>
+                        
+                        &nbsp;|&nbsp;
+                        
+                        <div id="edit" title="Edit Selected Song" class="command">
+                        <span class="icon_pencil-edit_alt"></span>
+                        </div>
+
+                        &nbsp;|&nbsp;
+
+                        <div id="delete" title="Delete Selected Song" class="command">
+                        <span class="icon_trash_alt"></span>
+                        </div>
+                        
+                        &nbsp;|&nbsp;
+
+                        <div id="copy" title="Copy All Songs" class="command">
+                        <span class="icon_documents_alt"></span>
+                        </div>
+                        
+                        &nbsp;|&nbsp;
+
+                        <div id="closeOverlay" title="Return to Scroller" class="command">
+                        <span class="icon_close_alt2"></span>
+                        </div>
+                    </div>
+                </span>
+                
+                <span id="formGroup" tabindex="4" style="display: none;" data-mode="">
+                    <textarea id="formText" class="formBody formField" cols="100"></textarea>
+                    
+                    <div class="footer">
+                        <div id="closeForm" title="Close" class="command">
+                            <span class="icon_check_alt2"></span>
+                        </div>
+                    </div>
+                </span>
+                
+                <span id="helpGroup" tabindex="5" style="display: none;">
+                    <div class="overlayContent helpText">
+                        <h2>Scroller 1.0.0 - User Guide</h2>
+                        <p>
+                            <span class="helpTopic">Description</span>
+                            Scroller is designed to function similar to a teleprompter.
+                            Though it can be used for various scenarios, it is especially
+                            suitable for musical performers that need a simple way to
+                            view scrolling song lyrics or notation. Features and usage
+                            are described below. This information is presented from the
+                            perspective of using Scroller for songs. If your intended
+                            usage is different, mentally replace "song" with any other
+                            type of text (such as "speech" or "poem") as
+                            you read through the remainder of this guide.
+                        </p>
+                        <p>
+                            There are a few technical notes to be aware of when using Scroller:
+                            <ul>
+                            <li> 
+                                Scroller requires a browser that supports the HTML5 standard.
+                                Most modern browsers have supported this standard for a few years,
+                                so it shouldn't be a concern. If your current browser version
+                                does not support HTML5, Scroller will let you know.
+                            </li> 
+                            <li>
+                                Scroller requires that your browser is configured to allow
+                                use of an HTML5 feature called Web Storage (also known as
+                                local storage). If your current browser is not configured to
+                                permit Web Storage, Scroller will let you know and provide
+                                general guidance on setting your browser to enable Web Storage.
+                            </li>
+                            <li>
+                                Since Scroller uses Web Storage, it does not require an internet
+                                connection to work. All songs you enter into Scroller are
+                                stored directly on your computer. This means you take Scroller
+                                with you to any venue without worrying about Wi-Fi availability.
+                            </li>
+                            <li>
+                                The songs Scroller stores on your computer are only accessible
+                                by the browser that you used to initially enter the songs into
+                                Scroller. If you need to copy your songs to another browser or
+                                another computer, a way to do so is described later in this guide.
+                            </li>
+                            <li>
+                                When your browser saves data on your computer using Web Storage,
+                                that data typically becomes part of the browser's cache.
+                                Consequently, be aware that clearing your browser cache may
+                                delete all songs previously stored by Scroller. If a need arises
+                                for you to clear your browser cache, get a copy of your songs
+                                before you do so. Then, after clearing your cache, you can more
+                                easily re-add them in Scroller.
+                            </li>
+                            </ul>
+                        </p>
+                        <p>
+                            <span class="helpTopic">The Main Screen</span>
+                            The visual layout of the main screen consists of an area that displays
+                            the title of the current song. Below it is a scrolling area that
+                            displays the lyrics of the current song. At the bottom is a series of
+                            horizontally arranged controls. These controls provide the following
+                            capabilities:
+                            <ul>
+                                <li>
+                                    <span class="arrow_carrot-down_alt2"></span>
+                                    __ / __
+                                    <span class="arrow_carrot-up_alt2"></span>
+                                    <br />
+                                    Moves to the next/previous song. The current song and
+                                    number of songs is displayed between the icons.
+                                </li>
+                                <li>
+                                    <span class="arrow_carrot-2down_alt2"></span>
+                                    <span class="icon_menu-circle_alt2"></span>
+                                    <br />
+                                    Starts/stops scrolling. Only one of these icons
+                                    appears at any given time, depending on whether scrolling
+                                    is on or off. (Tip: For convenience, pressing the space bar
+                                    also starts/stops scrolling.)
+                                </li>
+                                <li>
+                                    <span class="arrow_carrot-2left_alt2"></span>
+                                    <span class="arrow_carrot-left_alt2"></span>
+                                    ___
+                                    <span class="arrow_carrot-right_alt2"></span>
+                                    <span class="arrow_carrot-2right_alt2"></span>
+                                    <br />
+                                    Adjusts the scroll speed. The scroll speed of the current
+                                    song is displayed between the icons.
+                                </li>
+                                <li>
+                                    <span class="icon_zoom-in_alt"></span>
+                                    __
+                                    <span class="icon_zoom-out_alt"></span>
+                                    <br />
+                                    Adjusts the current song text size. The text size of the current
+                                    song is displayed between the icons.
+                                </li>
+                                <li>
+                                    <span class="icon_cog"></span>
+                                    <br />
+                                    Displays the Configuration Screen, which contains additional
+                                    controls for adding, editing, deleting, rearranging and
+                                    copying songs to your clipboard. These capabilities are
+                                    described in the next section.
+                                </li>
+                                <li>
+                                    <span class="icon_question_alt2"></span>
+                                    <br />
+                                    Displays help (what you are reading now).
+                                </li>
+                            </ul> 
+                        </p>
+                        <p>
+                            To use these controls, simply click the associated icons.
+                        </p>
+                        <p>
+                            <span class="helpTopic">The Configuration Screen</span>
+                            <p>
+                            The configuration screen appears on top of the main screen when the
+                            configuration icon is clicked. It displays an ordered list of your songs
+                            (after you've entered some), followed by a series of horizontally
+                            arranged controls. These controls provide the ability to configure
+                            Scroller as decribed below.
+                            </p>
+
+                            <ul>
+                            <li>
+                                <span class="arrow_carrot-down_alt2"></span>
+                                <span class="arrow_carrot-up_alt2"></span>
+                                <br />
+                                Moves the currently selected song up/down in the list. Any song may be
+                                selected by clicking on it. 
+                            </li>
+                            <li>
+                                <span class="icon_plus_alt2"></span>
+                                <br />
+                                Allows you to add a new song. Clicking this icon will display a text
+                                area containing labels that show you where to enter the song title and
+                                lyrics. It also provide an initial setting for the scroll speed and text
+                                size for the song. Typically, you will enter (or copy-and-paste) the song
+                                title immediately after the <span class="red">Title:</span> label, and
+                                enter (or paste) the song lyrics starting on the line below the
+                                <span class="red">Lyrics:</span> label. As you do so, it is important that
+                                you do not alter or delete the provided labels. You can also cause
+                                portions of the lyrics to be highlighted by enclosing them in brackets
+                                (<span class="red">[ ]</span>). Once you have finished entering your new
+                                song, click the icon at the bottom of the screen. Your new song will be
+                                added to the list of songs. (Tip: you can press the Escape key to return
+                                to the songs list without saving the song.)
+                            </li>
+                            <li>
+                                <span class="icon_pencil-edit_alt"></span>
+                                <br />
+                                Allows you to edit the currently selected song. Clicking this icon will
+                                display a text area containing the song title, speed, size, and lyrics.
+                                Each of these parts of the song will be marked by the same labels that
+                                were provided when you first entered the song. Simply edit the song as
+                                desired. When you're done, click the icon at the bottom of the screen
+                                to return to the songs list. (Tip: you can press the Escape key to
+                                return to the songs list without saving the song.)
+                            </li>
+                            <li>
+                                <span class="icon_trash_alt"></span>
+                                <br />
+                                Allows you to delete the currently selected song. You will be prompted
+                                to confirm that you really want to delete the song.
+                            </li>
+                            <li>
+                                <span class="icon_documents_alt"></span>
+                                <br />
+                                Allows you to copy all songs to your clipboard. This is useful if you want
+                                to copy your songs and add them to Scroller on a different computer or in
+                                a different browser. It's also a handy way to save a backup copy of your
+                                songs in a separate document.
+                            </li>
+                            <li>
+                                <span class="icon_close_alt2"></span>
+                                <br />
+                                Closes the configuration screen and returns you to Scroller's
+                                main screen.
+                            </li>
+                            </ul>
+                        </p>
+                        <p>
+                            <span class="helpTopic">Credits</span>
+                            <p>
+                                Scroller was developed by B. Martin "Marty" Hill as a
+                                personal project to meet his needs as a (very) amateur
+                                guitarist and singer. It is available as open source
+                                software under the licensing terms given below.
+                            </p>
+                            <p>
+                                Marty is not specifically a web developer by trade, so there are
+                                doubtless improvements and simplifications that other more skilled
+                                web developers might identify. They are encouraged to make such
+                                contributions through the Scroller project hosted on GitHub:
+                            </p>
+                            <p>
+                                <a href="https://github.com/martyhill/scroller">
+                                https://github.com/martyhill/scroller
+                                </a>
+                            </p>
+                        </p>
+                        <p>
+                            <span class="helpTopic">License</span>
+                            <p>MIT License</p>
+
+                            <p>Copyright (c) 2017 B. Martin Hill</p>
+
+                            <p>
+                            Permission is hereby granted, free of charge, to any person obtaining a copy
+                            of this software and associated documentation files (the "Software"), to deal
+                            in the Software without restriction, including without limitation the rights
+                            to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+                            copies of the Software, and to permit persons to whom the Software is
+                            furnished to do so, subject to the following conditions:
+                            </p>
+                            <p>
+                            The above copyright notice and this permission notice shall be included in all
+                            copies or substantial portions of the Software.
+                            </p>
+                            <p>
+                            THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+                            IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+                            FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+                            AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+                            LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+                            OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+                            SOFTWARE.
+                            </p>
+                        </p>
+                    </div>
+                    <div class="footer">
+                        <div id="closeHelp" title="Close" class="command">
+                            <span class="icon_close_alt2"></span>
+                        </div>
+                    </div>
+                </span>
+            </div>
+        </div>
+
+    </body>
+</html>
