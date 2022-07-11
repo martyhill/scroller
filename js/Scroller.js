@@ -22,6 +22,7 @@ Song.prototype.populate = function(text) {
         index = this.title ? this.title.lastIndexOf(':') : -1;
         this.title = index !== -1 ? this.title.slice(index+1) : "";
         this.title = this.title.replace(/^\s+/,"").trim();
+        if(!this.title) this.title = '...untitled...'
 
         this.speed = upper.match(/SPEED.*\:.*\d/);
         index = this.speed ? this.speed[0].lastIndexOf(':') : -1;
@@ -170,6 +171,7 @@ Scroller.setCurrentSong = function(value) {
     
     $('#songNumber').html(Scroller.songIndex+1);
     $('#songCount').html(Scroller.songs.length);
+    $('#song').focus();
 }
 
 Scroller.setPrevSong = function() {
@@ -498,7 +500,7 @@ Scroller.toggleScrolling = function() {
 Scroller.stop = function() {
     clearTimeout(Scroller.timer);
     Scroller.timer = null;
-    $('#scrollButton').removeClass("icon_menu-circle_alt2").addClass("arrow_carrot-2down_alt2");
+    $('#scrollButton').removeClass("icon_stop_alt2").addClass("arrow_triangle-down_alt2");
 }
 
 Scroller.start = function() {
@@ -510,7 +512,7 @@ Scroller.start = function() {
     else {
         var scrolling = Scroller.isScrolling();
         if(!scrolling) {
-            $('#scrollButton').removeClass("arrow_carrot-2down_alt2").addClass("icon_menu-circle_alt2");
+            $('#scrollButton').removeClass("arrow_triangle-down_alt2").addClass("icon_stop_alt2");
         }
         Scroller.scrollTop = current;
         $('#song').scrollTop(++current);
@@ -518,6 +520,18 @@ Scroller.start = function() {
         var interval = Scroller.speedMax - Scroller.speed + 1;
         Scroller.timer = setTimeout(Scroller.start, interval);
     }
+}
+
+Scroller.pgUp = function() {
+    var current = $('#song').scrollTop();
+    var incr = $('#song').height() * 0.95
+    $('#song').scrollTop(current - incr);
+}
+
+Scroller.pgDn = function() {
+    var current = $('#song').scrollTop();
+    var incr = $('#song').height() * 0.95
+    $('#song').scrollTop(current + incr);
 }
 
 Scroller.openHelp = function() {
@@ -537,6 +551,7 @@ Scroller.handleKeys = function(event) {
 
     if($('#listGroup').css('display') != 'none') {
         if(event.keyCode === 27)
+            // Esc
             $('#closeOverlay').click();
     }
     else if($('#formGroup').css('display') != 'none') {
@@ -553,8 +568,19 @@ Scroller.handleKeys = function(event) {
             $('#closeHelp').click();
     }
     else if(event.keyCode === 32) {
+        // Space
         event.preventDefault();
         Scroller.toggleScrolling();
+    }
+    else if(event.keyCode === 33) {
+        // PgUp - default behaviour: go up full page
+        event.preventDefault();
+        Scroller.pgUp()
+    }
+    else if(event.keyCode === 34) {
+        // PgDn - default behaviour: go down full page
+        event.preventDefault();
+        Scroller.pgDn()
     }
 }
 
@@ -621,7 +647,9 @@ $(function() {
     $('#moveUp').click(Scroller.moveSong);
     $('#nextSong').click(Scroller.setNextSong);
     $('#prevSong').click(Scroller.setPrevSong);
+    $('#pgUp').click(Scroller.pgUp);
     $('#toggleScroll').click(Scroller.toggleScrolling);
+    $('#pgDn').click(Scroller.pgDn);
     $('#maxSlower').click(Scroller.setSpeed);
     $('#minSlower').click(Scroller.setSpeed);
     $('#minFaster').click(Scroller.setSpeed);
