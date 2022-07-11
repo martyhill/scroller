@@ -18,15 +18,17 @@
 .arrow_carrot-down_alt2,
 .arrow_carrot-left_alt2,
 .arrow_carrot-right_alt2,
+.arrow_carrot-2up_alt2,
 .arrow_carrot-2down_alt2,
 .arrow_carrot-2left_alt2,
 .arrow_carrot-2right_alt2,
+.arrow_triangle-down_alt2,
 .icon_plus_alt2,
 .icon_close_alt2,
 .icon_check_alt2,
 .icon_zoom-out_alt,
 .icon_zoom-in_alt,
-.icon_menu-square_alt2,
+.icon_stop_alt2,
 .icon_menu-circle_alt2,
 .icon_documents_alt,
 .icon_pencil-edit_alt,
@@ -61,6 +63,10 @@
 	content: "\3d";
 }
 
+.arrow_carrot-2up_alt2:before {
+	content: "\3e";
+}
+
 .arrow_carrot-2down_alt2:before {
 	content: "\3f";
 }
@@ -73,12 +79,12 @@
 	content: "\41";
 }
 
-.icon_plus_alt2:before {
-	content: "\50";
+.arrow_triangle-down_alt2:before {
+	content: "\47";
 }
 
-.icon_close_alt2:before {
-	content: "\51";
+.icon_plus_alt2:before {
+	content: "\50";
 }
 
 .icon_check_alt2:before {
@@ -92,12 +98,12 @@
 	content: "\54";
 }
 
-.icon_menu-square_alt2:before {
-	content: "\62";
+.icon_stop_alt2:before {
+	content: "\5d";
 }
 
-.icon_menu-circle_alt2:before {
-	content: "\63";
+.icon_menu-square_alt2:before {
+	content: "\62";
 }
 
 .icon_documents_alt:before {
