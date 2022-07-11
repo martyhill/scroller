@@ -13,10 +13,10 @@
     </head>
 
 	<body>
-        <div id="title" class="titlePanel" tabindex="1">
+        <div id="title" class="titlePanel">
         </div>
 
-        <div id="song" class="songPanel">
+        <div id="song" class="songPanel" tabindex="1">
         </div>
 
         <div class="commandPanel">
@@ -30,10 +30,16 @@
             
             &nbsp;|&nbsp;
             
-            <div id="toggleScroll" title="Start/Stop Scrolling" class="command">
-            <span id="scrollButton" class="arrow_carrot-2down_alt2"></span>
+            <div id="pgUp" title="Page Up" class="command">
+            <span id="pgUpButton" class="arrow_carrot-2up_alt2"></span>
             </div>
-            
+            <div id="toggleScroll" title="Start/Stop Scrolling" class="command">
+            <span id="scrollButton" class="arrow_triangle-down_alt2"></span>
+            </div>
+            <div id="pgDn" title="Page Down" class="command">
+            <span id="pgUpButton" class="arrow_carrot-2down_alt2"></span>
+            </div>
+                            
             &nbsp;|&nbsp;
             
             <div id="maxSlower" title="REDUCE Scroll Speed" class="command">
@@ -113,8 +119,8 @@
                         
                         &nbsp;|&nbsp;
 
-                        <div id="closeOverlay" title="Return to Scroller" class="command">
-                        <span class="icon_close_alt2"></span>
+                        <div id="closeOverlay" title="Close" class="command">
+                        <span class="icon_check_alt2"></span>
                         </div>
                     </div>
                 </span>
@@ -200,13 +206,17 @@
                                     number of songs is displayed between the icons.
                                 </li>
                                 <li>
+                                    <span class="arrow_carrot-2up_alt2"></span>
+                                    <span class="arrow_triangle-down_alt2"></span>
+                                    <span class="icon_stop_alt2"></span>
                                     <span class="arrow_carrot-2down_alt2"></span>
-                                    <span class="icon_menu-circle_alt2"></span>
                                     <br />
-                                    Starts/stops scrolling. Only one of these icons
+                                    Inner Icons: Starts/stops scrolling. Only one of these icons
                                     appears at any given time, depending on whether scrolling
-                                    is on or off. (Tip: For convenience, pressing the space bar
+                                    is on or off. (Tip: Pressing the space bar
                                     also starts/stops scrolling.)
+                                    <br />
+                                    Outer Icons: Pages the current song up/down.
                                 </li>
                                 <li>
                                     <span class="arrow_carrot-2left_alt2"></span>
@@ -363,7 +373,7 @@
                     </div>
                     <div class="footer">
                         <div id="closeHelp" title="Close" class="command">
-                            <span class="icon_close_alt2"></span>
+                            <span class="icon_check_alt2"></span>
                         </div>
                     </div>
                 </span>
